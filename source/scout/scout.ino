@@ -284,6 +284,10 @@ static void setMotorSpeed(const boolean rightMotor, const int speed) {
   }
 }
 
+inline static int stopSpeed(bool brake) {
+  return brake ? 0x8000 : 0;
+}
+
 inline static void checkEncLDone() {
   if (!encLTrack)
     return;
@@ -300,10 +304,6 @@ inline static void checkEncRDone() {
   // stop
   if (!encRTrack)
     setMotorSpeed(true, stopSpeed(encRBrake));
-}
-
-inline static int stopSpeed(bool brake) {
-  return brake ? 0x8000 : 0;
 }
 
 static int vccRead (byte us) {
