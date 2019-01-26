@@ -133,6 +133,10 @@ void setup() {
   Serial.begin(baud);
 }
 
+inline static int stopSpeed(bool brake) {
+  return brake ? 0x8000 : 0;
+}
+
 //static word vccMeasurementCounter = 1;
 volatile long int encL = 0, encR = 0;
 static long int encLTgt = 0, encRTgt = 0, encLStart = 0, encRStart = 0;
@@ -312,10 +316,6 @@ inline static void checkEncRDone() {
     kI = 0;
     setMotorSpeed(RIGHT_MOTOR, stopSpeed(encRBrake));
   }
-}
-
-inline static int stopSpeed(bool brake) {
-  return brake ? 0x8000 : 0;
 }
 
 static int vccRead (byte us) {
